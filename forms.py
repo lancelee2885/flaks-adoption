@@ -31,4 +31,4 @@ class EditPetForm(FlaskForm):
     photo_url = StringField("Photo URL", validators=[Optional(), URL()])
     notes = StringField("Notes", validators=[Optional()])
     availability = BooleanField("Availability",
-                                 validators=[InputRequired()])
+                                 validators=[Optional()])

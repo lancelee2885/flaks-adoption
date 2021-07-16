@@ -1,18 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <!-- Gallery of Pets -->
-    {% for pet in pets%}
-        <img src="{{pet.photo_url}}">
-        <p>
-            <a href="/{{pet.id}}">{{pet.name}}</a> is 
+    <div class="row">
+        <!-- Gallery of Pets -->
+        {% for pet in pets%}
+        <p class="col">
+            <img src="{{pet.photo_url}}">
+            <br>
+            <a class="name" href="/{{pet.id}}">{{pet.name}}</a> is
             {% if pet.available == true %}
-                available
-            {% else %} 
-                not available 
+            available
+            {% else %}
+            not available
             {% endif %}
         </p>
-    {% endfor%}
+        {% endfor%}
+    </div>
     <!-- Add Pet Button -->
     <a class="btn btn-primary" href="/add"> Add Pet</a>
+
 {% endblock %}

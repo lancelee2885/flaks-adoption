@@ -1,9 +1,11 @@
 """Flask app for adopt app."""
 
+import requests
 from flask import Flask
 from flask.templating import render_template
 from werkzeug.utils import redirect
 from models import Pet
+from get_token import get_token
 
 from flask_debugtoolbar import DebugToolbarExtension
 
@@ -26,6 +28,14 @@ db.create_all()
 # app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 toolbar = DebugToolbarExtension(app)
+auth_token = None
+
+
+@app.before_first_request
+def refresh_credentials():
+    """Just once, get token and store it globally."""
+    global auth_token
+    auth_token = get_token()
 
 
 @app.route("/")
@@ -38,11 +48,10 @@ def home_page():
 
 
 @app.route('/add', methods=["GET", "POST"])
-def show_form():
+def show_add_pet_form():
     """Show user form and update pet list on database"""
 
     form = PetForm()
-
 
     if form.validate_on_submit():
         name = form.name.data
@@ -51,6 +60,7 @@ def show_form():
         age = form.age.data
         notes = form.notes.data
         
+        #adding pet instance into database
         pet = Pet(name=name, 
                   species=species, 
                   photo_url=photo_url, 
@@ -65,9 +75,8 @@ def show_form():
     return render_template('add_pet.html', form=form)
 
 @app.route('/<int:pet_id>', methods=["GET","POST"])
-def render_pet_page(pet_id):
+def render_pet_info_page(pet_id):
     """Show pet information"""
-
 
     pet = Pet.query.get_or_404(pet_id)
     form = EditPetForm(obj=pet)

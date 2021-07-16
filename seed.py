@@ -23,7 +23,7 @@ lance = Pet(name='Lance',
               age="young",
               notes="Hi",
               available=True)
-ray = Pet(name='ray', 
+Ray = Pet(name='ray', 
               species="fish", 
               photo_url="https://2.bp.blogspot.com/-3LLIwjxLQbk/VHtpfCCCtlI/AAAAAAABPNQ/I38y6dc2K8o/s1600/cute-dog-049-46.jpg",
               age="adult",

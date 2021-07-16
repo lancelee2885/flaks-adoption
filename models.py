@@ -13,6 +13,7 @@ def connect_db(app):
     db.init_app(app)
 
 class Pet(db.Model):
+    """Define properties of Pets and create a table in database"""
     
     __tablename__ = "pets"
     
