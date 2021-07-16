@@ -12,9 +12,53 @@
           <h5 class="card-title">{{pet.name}}</h5>
           <p class="card-text">Species: {{pet.species}}</p>
           <p class="card-text">Age: {{pet.age}}</p>
+
+          <!-- Form to change photo_url, notes, availability -->
+          <form method="POST">
+
+            {{ form.hidden_tag() }}
+          
+            {% for field in form if field.widget.input_type != "hidden" %}
+            <div class="form-group">
+          
+              <p>
+                {{ field.label(class_="form-label mt-4")}}
+                {{ field(class_="form-control") }}
+          
+                {% for error in field.errors %}
+                {{ error }}
+                {% endfor %}
+              </p>
+              {% endfor %}
+            </div>
+            <button type="submit">Edit</button>
+          </form>
+              
         </div>
       </div>
     </div>
   </div>
+<!-- 
+  Form to edit pet info
+  <form method="POST">
+
+    {{ form.hidden_tag() }}
+  
+    {% for field in form if field.widget.input_type != "hidden" %}
+    <div class="form-group">
+  
+      <p>
+        {{ field.label(class_="form-label mt-4")}}
+        {{ field(class_="form-control") }}
+  
+        {% for error in field.errors %}
+        {{ error }}
+        {% endfor %}
+      </p>
+      {% endfor %}
+    </div>
+    <button type="submit">Submit</button>
+  </form> -->
+
    
 {% endblock %}

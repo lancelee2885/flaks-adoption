@@ -8,7 +8,7 @@ from models import Pet
 from flask_debugtoolbar import DebugToolbarExtension
 
 from models import db, connect_db
-from forms import PetForm
+from forms import PetForm, EditPetForm
 
 app = Flask(__name__)
 
@@ -64,10 +64,24 @@ def show_form():
 
     return render_template('add_pet.html', form=form)
 
-@app.route('/<int:pet_id>')
+@app.route('/<int:pet_id>', methods=["GET","POST"])
 def render_pet_page(pet_id):
     """Show pet information"""
 
-    pet = Pet.query.get_or_404(pet_id)
 
-    return render_template('pet_info.html', pet=pet)
+    pet = Pet.query.get_or_404(pet_id)
+    form = EditPetForm(obj=pet)
+
+    if form.validate_on_submit():
+        photo_url = form.photo_url.data
+        notes = form.notes.data
+        availability = form.availability.data
+
+        pet.photo_url = photo_url
+        pet.notes = notes
+        pet.availibility = availability
+
+        db.session.commit()
+        return redirect(f'/{pet.id}')
+
+    return render_template('pet_info.html', pet=pet, form=form)
