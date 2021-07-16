@@ -68,6 +68,6 @@ def show_form():
 def render_pet_page(pet_id):
     """Show pet information"""
 
-    pet = Pet.query.get(pet_id)
+    pet = Pet.query.get_or_404(pet_id)
 
     return render_template('pet_info.html', pet=pet)
