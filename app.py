@@ -2,11 +2,13 @@
 
 from flask import Flask
 from flask.templating import render_template
+from werkzeug.utils import redirect
 from models import Pet
 
 from flask_debugtoolbar import DebugToolbarExtension
 
 from models import db, connect_db
+from forms import PetForm
 
 app = Flask(__name__)
 
@@ -32,3 +34,19 @@ def home_page():
     pets = Pet.query.all()
 
     return render_template("home.html", pets=pets)
+
+@app.route('/add', methods=["GET","POST"])
+def show_form():
+    """Show user form and update pet list on database"""
+    form = PetForm()
+
+    # Validate data
+    if(form.validate_on_submit()):
+        name = form.name.data
+        species = form.species.data
+        photo_url = form.photo_url.data
+        return redirect('/')
+
+        
+    return render_template('/add', form=form)
+
