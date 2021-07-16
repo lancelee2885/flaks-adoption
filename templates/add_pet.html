@@ -2,22 +2,25 @@
 
 {% block content %}
 
-	<form method="POST">
-		{{ form.hidden_tag() }}
+<form method="POST">
 
-		{% for field in form if field.widget.input_type != "hidden" %}
+	{{ form.hidden_tag() }}
+
+	{% for field in form if field.widget.input_type != "hidden" %}
+	<div class="form-group">
+
 		<p>
-			{{ field.label }}
-			{{ field }}
+			{{ field.label(class_="form-label mt-4")}}
+			{{ field(class_="form-control") }}
 
 			{% for error in field.errors %}
-				{{ error }}
+			{{ error }}
 			{% endfor %}
 		</p>
 		{% endfor %}
+	</div>
+	<button type="submit">Submit</button>
+</form>
 
-		<button type="submit">Submit</button>
-	</form>
 
-	
 {% endblock %}
