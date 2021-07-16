@@ -5,7 +5,7 @@ from flask import Flask
 from flask.templating import render_template
 from werkzeug.utils import redirect
 from models import Pet
-from get_token import get_token
+from handle_pet_api import *
 
 from flask_debugtoolbar import DebugToolbarExtension
 
