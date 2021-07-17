@@ -25,8 +25,12 @@ def get_pets_data(token):
 
     animal = choice(resp['animals'])
     
-    name = animal['name']
-    age = animal['age']
-    photo_url = animal['photos'][0]['medium']
+    name = animal['name'] or None
+    age = animal['age'] or None
+
+    try:
+        photo_url = animal['photos'][0]['medium']
+    except IndexError:
+        photo_url = 'https://4.bp.blogspot.com/-moOjG4b4lEU/VzjQqH9veSI/AAAAAAABnHA/elRhSktc9FgHNQaIt8KtUiRXQtZHXBkIQCLcB/s1600/cute-dogs-125-28.jpg'
 
     return {"name":name, "age":age, "photo_url":photo_url}

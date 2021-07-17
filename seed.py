@@ -16,24 +16,24 @@ whiskey = Pet(name='Whiskey',
               photo_url="https://2.bp.blogspot.com/-3LLIwjxLQbk/VHtpfCCCtlI/AAAAAAABPNQ/I38y6dc2K8o/s1600/cute-dog-049-46.jpg",
               age="baby",
               notes="Hi",
-              available=True)
+              availability=True)
 lance = Pet(name='Lance', 
               species="cat", 
               photo_url="https://2.bp.blogspot.com/-3LLIwjxLQbk/VHtpfCCCtlI/AAAAAAABPNQ/I38y6dc2K8o/s1600/cute-dog-049-46.jpg",
               age="young",
               notes="Hi",
-              available=True)
+              availability=True)
 Ray = Pet(name='ray', 
               species="fish", 
               photo_url="https://2.bp.blogspot.com/-3LLIwjxLQbk/VHtpfCCCtlI/AAAAAAABPNQ/I38y6dc2K8o/s1600/cute-dog-049-46.jpg",
               age="adult",
               notes="Hi",
-              available=True)
+              availability=True)
 
 # Add new objects to session, so they'll persist
 db.session.add(whiskey)
 db.session.add(lance)
-db.session.add(ray)
+db.session.add(Ray)
 
 # Commit--otherwise, this never gets saved!
 db.session.commit()

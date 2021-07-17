@@ -44,7 +44,9 @@ def home_page():
 
     pets = Pet.query.all()
 
-    return render_template("home.html", pets=pets)
+    random_pet = get_pets_data(auth_token)
+
+    return render_template("home.html", pets=pets, random_pet=random_pet)
 
 
 @app.route('/add', methods=["GET", "POST"])
@@ -88,7 +90,7 @@ def render_pet_info_page(pet_id):
 
         pet.photo_url = photo_url
         pet.notes = notes
-        pet.availibility = availability
+        pet.availability = availability
 
         db.session.commit()
         return redirect(f'/{pet.id}')
